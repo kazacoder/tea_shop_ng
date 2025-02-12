@@ -1,1 +1,157 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  font-family: Arial, sans-serif;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+}
+
+
+/* Banners styles */
+.banner {
+  height: 640px;
+  width: 1320px;
+}
+
+.banner.banner_1 {
+  background: url("assets/images/banner_1.png") no-repeat center right fixed;
+  background-size: cover;
+}
+
+.banner.banner_2 {
+  background: url("assets/images/banner_2.png") no-repeat center right fixed;
+  background-size: cover;
+
+}
+
+.banner.banner_3 {
+  background: url("assets/images/banner_3.png") no-repeat center right fixed;
+  background-size: cover;
+
+}
+
+/* Slick slider styles override */
+.slick-arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #076BFF;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slick-next.slick-arrow {
+  right: 16px;
+}
+
+.slick-prev.slick-arrow {
+  left: 16px;
+  z-index: 1;
+}
+
+.slick-arrow::before {
+  display: inline-block;
+  content: '';
+  width: 100%;
+  height: 100%;
+  background: url("assets/images/icons/caret-right.svg") center no-repeat;
+}
+
+.slick-arrow.slick-prev::before {
+  transform: rotate(180deg);
+}
+
+/* JQueryUI Accordion styles customizing: gap, icons, etc. */
+#accordion > h3 {
+  margin: 8px 0;
+  transition: margin 0.1s linear;
+}
+
+#accordion > h3:first-child {
+  margin-top: 0;
+}
+#accordion > .ui-accordion-header-collapsed:last-of-type {
+  margin-bottom: 0;
+}
+
+.ui-state-default,
+.ui-button.ui-state-disabled:active {
+  color: white;
+}
+
+.ui-icon.custom-icon-caret-up {
+  background: url("assets/images/icons/caret-up.svg");
+  height: 20px;
+  min-width: 20px;
+  display: inline-block;
+}
+
+.ui-icon.custom-icon-caret-down {
+  background: url("assets/images/icons/caret-down.svg");
+  height: 20px;
+  min-width: 20px;
+  display: inline-block;
+}
+
+.hvr-grow:before {
+  background: #032c6c;
+  border-radius: 5px;
+}
+
+
+/* .btr transition transform override to avoid text jumping*/
+.btn {
+  transition: transform 0.3s linear;
+}
+
+@media screen and (max-width: 1399px) {
+  .banner {
+    width: unset;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .banner {
+    height: 480px;
+    background-size: cover;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .banner {
+    height: 320px;
+  }
+
+  .slick-next.slick-arrow {
+    right: 10px;
+  }
+
+  .slick-prev.slick-arrow {
+    left: 10px;
+  }
+}
+
+
+/* Пришлось чуть отойти от ТЗ и добавить немного стилей, иначе текст
+   в слайдере нечитаемый получается на адаптиве */
+@media screen and (max-width: 991px) {
+  .banner_3 .highlighted-text {
+    -webkit-text-stroke: 1px #ebe7e1;
+    color: #e42027;
+  }
+
+  .banner_2 .highlighted-text {
+    -webkit-text-stroke: 1px #84a4cf;
+    color: #052c65;
+  }
+}
+
