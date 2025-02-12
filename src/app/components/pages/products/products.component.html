@@ -4,73 +4,14 @@
       <div class='h2 fw-bold mb-5'>Наши чайные коллекции</div>
     </div>
     <div class="row d-flex flex-wrap justify-content-center gap-3 px-3">
-      <div class="col-4 card p-0 d-flex" style="width: 26rem;">
-        <a href="assets/images/image_1.png" class="product-image">
-          <img src="assets/images/image_1.png" class="card-img-top" alt="Tea image 1">
-        </a>
-        <div class="card-body p-4 d-flex flex-column align-items-center align-items-sm-start">
-          <h5 class="card-title mb-3 fw-bold">Детокс чай лайм</h5>
-          <p class="card-text mb-4 text-center text-sm-start">Великолепный чай внесет в вашу жизнь яркие
-            краски и
-            вкус расслабления</p>
-          <a href="#" class="btn btn-primary px-5 py-2">Подробнее</a>
+      <div class="col-4 card p-0 d-flex" style="width: 26rem;"  *ngFor="let product of products">
+        <div class="product-image">
+          <img [src]="product.image" class="card-img-top" alt="Tea image 1">
         </div>
-      </div>
-      <div class="col-4 card p-0" style="width: 26rem;">
-        <a href="assets/images/image_2.png" class="product-image">
-          <img src="assets/images/image_2.png" class="card-img-top" alt="Tea image 2">
-        </a>
         <div class="card-body p-4 d-flex flex-column align-items-center align-items-sm-start">
-          <h5 class="card-title mb-3 fw-bold">Ягодный чай</h5>
-          <p class="card-text mb-4 text-center text-sm-start">Нотки ягод позволят вам расслабиться и
-            насладиться
-            великолепием этого чая</p>
-          <a href="#" class="btn btn-primary px-5 py-2">Подробнее</a>
-        </div>
-      </div>
-      <div class="col-4 card p-0" style="width: 26rem;">
-        <a href="assets/images/image_3.png" class="product-image">
-          <img src="assets/images/image_3.png" class="card-img-top" alt="Tea image 3">
-        </a>
-        <div class="card-body p-4 d-flex flex-column align-items-center align-items-sm-start">
-          <h5 class="card-title mb-3 fw-bold">Цветочный чай</h5>
-          <p class="card-text mb-4 text-center text-sm-start">Душистые цветы создают невероятный аромат и
-            наполняют вас энергией</p>
-          <a href="#" class="btn btn-primary px-5 py-2">Подробнее</a>
-        </div>
-      </div>
-      <div class="col-4 card p-0" style="width: 26rem;">
-        <a href="assets/images/image_4.png" class="product-image">
-          <img src="assets/images/image_4.png" class="card-img-top" alt="Tea image 3">
-        </a>
-        <div class="card-body p-4 d-flex flex-column align-items-center align-items-sm-start">
-          <h5 class="card-title mb-3 fw-bold">Очищающий чай</h5>
-          <p class="card-text mb-4 text-center text-sm-start">Бесподобный чай для получения утреннего заряда
-            бодрости</p>
-          <a href="#" class="btn btn-primary px-5 py-2">Подробнее</a>
-        </div>
-      </div>
-      <div class="col-4 card p-0" style="width: 26rem;">
-        <a href="assets/images/image_5.png" class="product-image">
-          <img src="assets/images/image_5.png" class="card-img-top" alt="Tea image 3">
-        </a>
-        <div class="card-body p-4 d-flex flex-column align-items-center align-items-sm-start">
-          <h5 class="card-title mb-3 fw-bold">Кислый чай</h5>
-          <p class="card-text mb-4 text-center text-sm-start">Кислый чай для настоящих ценителей кислинки во
-            время
-            чаепития</p>
-          <a href="#" class="btn btn-primary px-5 py-2">Подробнее</a>
-        </div>
-      </div>
-      <div class="col-4 card p-0" style="width: 26rem;">
-        <a href="assets/images/image_6.png" class="product-image">
-          <img src="assets/images/image_6.png" class="card-img-top" alt="Tea image 3">
-        </a>
-        <div class="card-body p-4 d-flex flex-column align-items-center align-items-sm-start">
-          <h5 class="card-title mb-3 fw-bold">Лимонная мята</h5>
-          <p class="card-text mb-4 text-center text-sm-start">Смесь лимона с мятой сделает ваш день самым
-            лучшим</p>
-          <a href="#" class="btn btn-primary px-5 py-2">Подробнее</a>
+          <h5 class="card-title mb-3 fw-bold">{{ product.title }}</h5>
+          <p class="card-text mb-4 text-center text-sm-start">{{ product.description | trunc: 90 }}</p>
+          <a [routerLink]="['/products', product.id]" class="btn btn-primary px-5 py-2">Подробнее</a>
         </div>
       </div>
     </div>

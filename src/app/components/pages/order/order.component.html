@@ -5,42 +5,54 @@
         <div id="make-order" class='h2 fw-bold mb-5 text-center mt-4'>Сделать заказ</div>
         <form class="needs-validation" novalidate>
           <div class="row justify-content-between">
+            <div class="">
+              <label class="form-label text-center text-md-start w-100">Товар</label>
+              <input type="text" class="form-control" required disabled>
+              <div class="valid-feedback">OK</div>
+              <div class="invalid-feedback">Введите корректное значение</div>
+            </div>
             <div class="col-sm-12 col-md-6 col-lg-4">
-              <label for="firstName" class="form-label">Имя</label>
+              <label for="firstName" class="form-label text-center text-md-start w-100">Имя</label>
               <input type="text" class="form-control" id="firstName" required>
               <div class="valid-feedback">OK</div>
               <div class="invalid-feedback">Введите корректное значение</div>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-4">
-              <label for="lastName" class="form-label">Фамилия</label>
+              <label for="lastName" class="form-label text-center text-md-start w-100">Фамилия</label>
               <input type="text" class="form-control" id="lastName" required>
               <div class="valid-feedback">OK</div>
               <div class="invalid-feedback">Введите корректное значение</div>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-4">
-              <label for="phone" class="form-label">Телефон</label>
+              <label for="phone" class="form-label text-center text-md-start w-100">Телефон</label>
               <input type="text" class="form-control" id="phone" required pattern="\(\d{3}\) \d{3}-\d{4}">
               <div class="valid-feedback">OK</div>
               <div class="invalid-feedback">Введите корректное значение</div>
             </div>
             <div class="col-md-12 col-lg-6">
-              <label for="country" class="form-label">Страна</label>
+              <label for="country" class="form-label text-center text-md-start w-100">Страна</label>
               <input type="text" class="form-control" id="country" required>
               <div class="valid-feedback">OK</div>
               <div class="invalid-feedback">Введите корректное значение</div>
             </div>
             <div class="col-md-12 col-lg-6">
-              <label for="zipCode" class="form-label">Индекс</label>
+              <label for="zipCode" class="form-label text-center text-md-start w-100">Индекс</label>
               <input type="text" class="form-control" id="zipCode" required pattern="\d{6}">
               <div class="valid-feedback">OK</div>
               <div class="invalid-feedback">Введите корректное значение</div>
             </div>
             <div class="mb-3">
-              <label for="address" class="form-label">Адрес</label>
+              <label for="address" class="form-label text-center text-md-start w-100">Адрес</label>
               <input type="text" class="form-control" id="address" required>
               <div class="valid-feedback">OK</div>
               <div class="invalid-feedback">Введите корректное значение</div>
             </div>
+          </div>
+            <div class="mb-3">
+              <label for="comment" class="form-label text-center text-md-start w-100">Комментарий к заказу</label>
+              <textarea id="comment" cols="30" rows="2" class="form-control"></textarea>
+              <div class="valid-feedback">OK</div>
+              <div class="invalid-feedback">Введите корректное значение</div>
           </div>
           <div class="d-flex justify-content-md-start justify-content-center">
             <button type="submit" class="btn btn-primary px-5">Отправить</button>

@@ -9,6 +9,9 @@ import { MainComponent } from './components/pages/main/main.component';
 import { ProductsComponent } from './components/pages/products/products.component';
 import { ProductComponent } from './components/pages/product/product.component';
 import { OrderComponent } from './components/pages/order/order.component';
+import {ProductService} from "./services/product.service";
+import {HttpClientModule} from "@angular/common/http";
+import { TruncPipe } from './pipes/trunc.pipe';
 
 @NgModule({
   declarations: [
@@ -18,13 +21,15 @@ import { OrderComponent } from './components/pages/order/order.component';
     MainComponent,
     ProductsComponent,
     ProductComponent,
-    OrderComponent
+    OrderComponent,
+    TruncPipe
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

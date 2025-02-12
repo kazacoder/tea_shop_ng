@@ -1,1 +1,28 @@
-<p>product works!</p>
+  <div class="container my-4 d-flex flex-column align-items-center">
+    <div class="text-center">
+      <div class='h2 fw-bold mb-5'>{{ product.title }}</div>
+    </div>
+    <div class="row d-flex flex-wrap justify-content-center gap-3 px-3">
+      <div class="card p-0 d-flex align-items-center">
+        <div class="d-flex">
+          <div class="product-image d-none d-xl-block" style="max-width: 26em;">
+            <img [src]="product.image" class="card-img-top opacity-50" alt="Tea image 1">
+          </div>
+          <div class="product-image d-none d-md-block" style="max-width: 26em;">
+            <img [src]="product.image" class="card-img-top opacity-75" alt="Tea image 1">
+          </div>
+          <div class="product-image" style="max-width: 26em;">
+            <img [src]="product.image" class="card-img-top" alt="Tea image 1">
+          </div>
+        </div>
+
+        <div class="card-body p-4 d-flex flex-column align-items-center align-items-sm-start">
+          <p class="fw-bold card-text mb-4 text-center text-sm-start">
+            Цена: {{ product.price | currency:'руб.' }} за 100 г.
+          </p>
+          <p class="card-text mb-4 text-center text-sm-start">{{ product.description}}</p>
+          <a [routerLink]="'/order'" class="btn btn-primary px-5 py-2">Купить</a>
+        </div>
+      </div>
+    </div>
+  </div>
