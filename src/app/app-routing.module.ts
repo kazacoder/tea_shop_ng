@@ -4,12 +4,13 @@ import {MainComponent} from "./components/pages/main/main.component";
 import {ProductsComponent} from "./components/pages/products/products.component";
 import {OrderComponent} from "./components/pages/order/order.component";
 import {ProductComponent} from "./components/pages/product/product.component";
+const commonTitle = 'Tea Shop | '
 
 const routes: Routes = [
-  {path: '', component: MainComponent},
-  {path: 'products', component: ProductsComponent},
-  {path: 'products/:id', component: ProductComponent},
-  {path: 'order', component: OrderComponent},
+  {path: '', component: MainComponent, title: commonTitle + 'Главная'},
+  {path: 'products', component: ProductsComponent, title: commonTitle + 'Каталог'},
+  {path: 'products/:id', component: ProductComponent, title: commonTitle + 'О товаре'},
+  {path: 'order', component: OrderComponent, title: commonTitle + 'Заказ'},
   {path: '**', redirectTo: ''}
 ];
 
