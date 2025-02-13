@@ -158,3 +158,39 @@ body {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.invalid-feedback {
+  display: block!important;
+}
+
+.server-error {
+  transition: all .3s ease-in-out;
+}
+
+
+.loader-bg {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .loader {
+    border: 15px solid #8f8f8f;
+    border-top: 15px solid #1f1fdc;
+    border-bottom: 15px solid blue;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s infinite linear;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+

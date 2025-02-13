@@ -3,6 +3,7 @@ import {ProductType} from "../../../types/product.type";
 import {ProductService} from "../../../services/product.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription, tap} from "rxjs";
+import {OrderService} from "../../../services/order.service";
 
 @Component({
   selector: 'app-product',
@@ -23,7 +24,8 @@ export class ProductComponent implements OnInit, OnDestroy {
 
   constructor(private productService: ProductService,
               private activatedRoute: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              public orderService: OrderService) {
   }
 
   ngOnInit(): void {
@@ -40,7 +42,9 @@ export class ProductComponent implements OnInit, OnDestroy {
           .subscribe(
             {
               next: data => {
-                  this.product = data;
+                this.product = data;
+                this.orderService.productId = data.id.toString()
+                this.orderService.productTitle = data.title;
               },
               error: error => {
                 console.log(error);

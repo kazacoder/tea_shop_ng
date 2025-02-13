@@ -2,60 +2,73 @@
   <div class="container-xxl my-5">
     <div class="row justify-content-center">
       <div class="col-xl-6 col-lg-7 col-sm-8">
-        <div id="make-order" class='h2 fw-bold mb-5 text-center mt-4'>Сделать заказ</div>
-        <form class="needs-validation" novalidate>
+        <div id="make-order" class='h2 fw-bold mb-5 text-center mt-4' *ngIf="!successOrder">Сделать заказ</div>
+        <div class='h2 fw-bold mb-5 text-center mt-4' *ngIf="successOrder">Спасибо за заказ!</div>
+        <form class="needs-validation" novalidate [formGroup]="orderForm" *ngIf="!successOrder">
           <div class="row justify-content-between">
             <div class="">
               <label class="form-label text-center text-md-start w-100">Товар</label>
-              <input type="text" class="form-control" required disabled>
-              <div class="valid-feedback">OK</div>
-              <div class="invalid-feedback">Введите корректное значение</div>
+              <input type="text" class="form-control" formControlName="product" required>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-4">
-              <label for="firstName" class="form-label text-center text-md-start w-100">Имя</label>
-              <input type="text" class="form-control" id="firstName" required>
-              <div class="valid-feedback">OK</div>
-              <div class="invalid-feedback">Введите корректное значение</div>
+              <label for="firstName" class="form-label text-center text-md-start w-100">Имя*</label>
+              <input type="text" class="form-control" id="firstName" formControlName="firstName" required>
+              <div *ngIf="firstName?.invalid && (firstName?.touched || firstName?.dirty) || buttonSendPressed">
+                <div class="invalid-feedback" *ngIf="firstName?.errors?.['pattern']">В поле Имя можно вводить только буквы</div>
+                <div class="invalid-feedback" *ngIf="firstName?.errors?.['required']">Обязательное поле</div>
+              </div>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-4">
-              <label for="lastName" class="form-label text-center text-md-start w-100">Фамилия</label>
-              <input type="text" class="form-control" id="lastName" required>
-              <div class="valid-feedback">OK</div>
-              <div class="invalid-feedback">Введите корректное значение</div>
+              <label for="lastName" class="form-label text-center text-md-start w-100">Фамилия*</label>
+              <input type="text" class="form-control" id="lastName" formControlName="lastName" required>
+              <div *ngIf="lastName?.invalid && (lastName?.touched || lastName?.dirty) || buttonSendPressed">
+                <div class="invalid-feedback" *ngIf="lastName?.errors?.['pattern']">В поле Фамилия можно вводить только буквы</div>
+                <div class="invalid-feedback" *ngIf="lastName?.errors?.['required']">Обязательное поле</div>
+              </div>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-4">
-              <label for="phone" class="form-label text-center text-md-start w-100">Телефон</label>
-              <input type="text" class="form-control" id="phone" required pattern="\(\d{3}\) \d{3}-\d{4}">
-              <div class="valid-feedback">OK</div>
-              <div class="invalid-feedback">Введите корректное значение</div>
+              <label for="phone" class="form-label text-center text-md-start w-100">Телефон*</label>
+              <input type="text" class="form-control" id="phone" formControlName="phone" required>
+              <div *ngIf="phone?.invalid && (phone?.touched || phone?.dirty) || buttonSendPressed">
+                <div class="invalid-feedback" *ngIf="phone?.errors?.['pattern']">Номер должен содержать 11 цифр</div>
+                <div class="invalid-feedback" *ngIf="phone?.errors?.['required']">Обязательное поле</div>
+              </div>
             </div>
-            <div class="col-md-12 col-lg-6">
-              <label for="country" class="form-label text-center text-md-start w-100">Страна</label>
-              <input type="text" class="form-control" id="country" required>
-              <div class="valid-feedback">OK</div>
-              <div class="invalid-feedback">Введите корректное значение</div>
-            </div>
-            <div class="col-md-12 col-lg-6">
-              <label for="zipCode" class="form-label text-center text-md-start w-100">Индекс</label>
-              <input type="text" class="form-control" id="zipCode" required pattern="\d{6}">
-              <div class="valid-feedback">OK</div>
-              <div class="invalid-feedback">Введите корректное значение</div>
-            </div>
-            <div class="mb-3">
-              <label for="address" class="form-label text-center text-md-start w-100">Адрес</label>
-              <input type="text" class="form-control" id="address" required>
-              <div class="valid-feedback">OK</div>
-              <div class="invalid-feedback">Введите корректное значение</div>
+            <div formGroupName="addressGroup">
+              <div class="col-md-12 col-lg-6">
+                <label for="country" class="form-label text-center text-md-start w-100">Страна*</label>
+                <input type="text" class="form-control" id="country" formControlName="country" required>
+                <div *ngIf="country?.invalid && (country?.touched || country?.dirty) || buttonSendPressed">
+                  <div class="invalid-feedback" *ngIf="country?.errors?.['pattern']">В поле Страна можно вводить только буквы</div>
+                  <div class="invalid-feedback" *ngIf="country?.errors?.['required']">Обязательное поле</div>
+                </div>
+              </div>
+              <div class="col-md-12 col-lg-6">
+                <label for="zipCode" class="form-label text-center text-md-start w-100">Индекс*</label>
+                <input type="text" class="form-control" id="zipCode" formControlName="zipCode" required pattern="\d{6}">
+                <div *ngIf="zipCode?.invalid && (zipCode?.touched || zipCode?.dirty) || buttonSendPressed">
+                  <div class="invalid-feedback" *ngIf="zipCode?.errors?.['pattern']">Номер должен содержать 6 цифр</div>
+                  <div class="invalid-feedback" *ngIf="zipCode?.errors?.['required']">Обязательное поле</div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="address" class="form-label text-center text-md-start w-100">Адрес*</label>
+                <input type="text" class="form-control" id="address" formControlName="address" required>
+                <div *ngIf="address?.invalid && (address?.touched || address?.dirty) || buttonSendPressed">
+                  <div class="invalid-feedback" *ngIf="address?.errors?.['pattern']">Допустимы только буквы, цифры, пробелы, дефис и слеш</div>
+                  <div class="invalid-feedback" *ngIf="address?.errors?.['required']">Обязательное поле</div>
+                </div>
+              </div>
             </div>
           </div>
-            <div class="mb-3">
+            <div class="mb-1">
               <label for="comment" class="form-label text-center text-md-start w-100">Комментарий к заказу</label>
-              <textarea id="comment" cols="30" rows="2" class="form-control"></textarea>
-              <div class="valid-feedback">OK</div>
-              <div class="invalid-feedback">Введите корректное значение</div>
+              <textarea id="comment" cols="30" rows="2" class="form-control" formControlName="commentary"></textarea>
           </div>
-          <div class="d-flex justify-content-md-start justify-content-center">
-            <button type="submit" class="btn btn-primary px-5">Отправить</button>
+          <div class="mb-3">* обязательные поля</div>
+          <div class="d-flex flex-md-row flex-column-reverse justify-content-md-start justify-content-center align-items-center">
+            <button type="button" class="btn btn-primary px-5" (click)="sendOrder()" [class]="{disabled: orderForm.invalid}" #sendOrderButton>Отправить</button>
+            <div class="text-danger ms-md-2 mb-2 mb-md-0 opacity-0 server-error" #unsuccessfulResponseElem>Произошла ошибка. Попробуйте еще раз.</div>
           </div>
         </form>
       </div>
