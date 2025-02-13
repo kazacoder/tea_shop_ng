@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'header-component',
@@ -7,9 +8,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  searchForm = {
+    search: ''
+  }
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+    const searchString = new URLSearchParams(window.location.search).get('searchString');
+    if (searchString) {
+      this.searchForm.search = searchString;
+    }
+  }
+
+  cleanSearchInput() {
+    this.searchForm.search = '';
+  }
+
+  search() {
+    if (this.searchForm.search) {
+      this.router.navigate(['/products'], { queryParams: { searchString: this.searchForm.search } }).then();
+    } else {
+      this.router.navigate(['/products']).then();
+    }
   }
 
 }

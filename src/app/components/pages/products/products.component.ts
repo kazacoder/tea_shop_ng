@@ -15,6 +15,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
   public isEmptySearch = false;
   public loading: boolean = false;
   private subscriptionProducts: Subscription | null = null;
+  private subscriptionSearch: Subscription | null = null;
+  private subscriptionRoute: Subscription | null = null;
   private subject: Subject<ProductType[]> = new Subject();
   public products: ProductType[] = [];
 
@@ -25,21 +27,23 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loading = true;
-    this.activatedRoute.queryParams.subscribe(params => {
+    this.subscriptionRoute = this.activatedRoute.queryParams.subscribe(params => {
       if (params['searchString']) {
+        this.loading = true;
         this.productService.searchProducts(params['searchString']).subscribe(data => {
           this.isEmptySearch = data.length === 0;
           this.loading = false;
           this.subject.next(data);
         });
 
-        this.subject.subscribe(data => {
+        this.subscriptionSearch = this.subject.subscribe(data => {
           this.products = data;
         });
 
         this.productTitle = `Результаты поиска по запросу "${params['searchString']}"`
 
       } else {
+        this.loading = true;
         this.productTitle = 'Наши чайные коллекции';
         this.isEmptySearch = false;
         this.showAllProducts()
@@ -49,6 +53,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptionProducts?.unsubscribe()
+    this.subscriptionSearch?.unsubscribe()
+    this.subscriptionRoute?.unsubscribe()
   }
 
 

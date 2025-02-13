@@ -1,0 +1,19 @@
+.search-input {
+  position: relative;
+  input {
+    padding-right: 21px!important;
+
+  }
+  .btn-clean {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    background: none;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    color: #611414;
+    font-size: 30px!important;
+  }
+}
