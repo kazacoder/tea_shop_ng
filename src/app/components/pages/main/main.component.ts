@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Observable, Subscription} from "rxjs";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {PopupComponent} from "../../common/popup/popup.component";
 declare var $: any
 
 @Component({
@@ -6,11 +9,40 @@ declare var $: any
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit {
+export class MainComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  private popupObservable: Observable<void>;
+  private popupSubscription: Subscription | null = null;
+
+  constructor(private popup: MatDialog) {
+    this.popupObservable = new Observable<void>((observer) => {
+      const timeout = setTimeout(() => {
+        observer.next();
+      }, 10000)
+      return {
+        unsubscribe() {
+          clearTimeout(timeout)
+        }
+      }
+    })
+  }
 
   ngOnInit(): void {
+
+    const dialogConfig: MatDialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = false;
+    dialogConfig.data = {
+      id: 1,
+      title: 'Каталог'
+    }
+
+    this.popupSubscription = this.popupObservable?.subscribe({
+      next: () => {
+        this.popup.open(PopupComponent, dialogConfig)
+      }
+    })
+
     // slick slider init + settings
     $('.slider').slick({
       dots: false,
@@ -39,7 +71,10 @@ export class MainComponent implements OnInit {
       icons: icons,
       heightStyle: "content"
     });
+  }
 
+  ngOnDestroy() {
+    this.popupSubscription?.unsubscribe()
   }
 
 }

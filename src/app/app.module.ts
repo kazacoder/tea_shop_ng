@@ -12,6 +12,10 @@ import { OrderComponent } from './components/pages/order/order.component';
 import {ProductService} from "./services/product.service";
 import {HttpClientModule} from "@angular/common/http";
 import { TruncPipe } from './pipes/trunc.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PopupComponent } from './components/common/popup/popup.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -22,12 +26,16 @@ import { TruncPipe } from './pipes/trunc.pipe';
     ProductsComponent,
     ProductComponent,
     OrderComponent,
-    TruncPipe
+    TruncPipe,
+    PopupComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatButtonModule,
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]
