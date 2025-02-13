@@ -19,8 +19,9 @@
 <!--        </li>-->
       </ul>
       <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Поиск чая" aria-label="Search">
-        <button class="btn btn-outline-primary px-2 px-sm-4" type="submit">Найти</button>
+        <input class="form-control me-2" type="search" placeholder="Поиск чая" aria-label="Search" #search>
+        <button class="btn btn-outline-danger d-flex me-1" type="button"><i class="material-icons">close</i></button>
+        <button class="btn btn-outline-primary px-2 px-sm-4" type="button" routerLink="/products" [queryParams]="{searchString: search.value}">Найти</button>
       </form>
     </div>
   </div>

@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ProductType} from "../../../types/product.type";
 import {ProductService} from "../../../services/product.service";
-import {Router} from "@angular/router";
-import {Subscription, tap} from "rxjs";
+import {ActivatedRoute, Router} from "@angular/router";
+import {Subject, Subscription, tap} from "rxjs";
 
 @Component({
   selector: 'app-products',
@@ -10,18 +10,52 @@ import {Subscription, tap} from "rxjs";
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit, OnDestroy {
-  loading: boolean = false;
+
+  public productTitle: string = 'Наши чайные коллекции';
+  public isEmptySearch = false;
+  public loading: boolean = false;
   private subscriptionProducts: Subscription | null = null;
+  private subject: Subject<ProductType[]> = new Subject();
   public products: ProductType[] = [];
 
   constructor(private productService: ProductService,
-              private router: Router) { }
+              private router: Router,
+              private activatedRoute: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
     this.loading = true;
+    this.activatedRoute.queryParams.subscribe(params => {
+      if (params['searchString']) {
+        this.productService.searchProducts(params['searchString']).subscribe(data => {
+          this.isEmptySearch = data.length === 0;
+          this.loading = false;
+          this.subject.next(data);
+        });
 
+        this.subject.subscribe(data => {
+          this.products = data;
+        });
+
+        this.productTitle = `Результаты поиска по запросу "${params['searchString']}"`
+
+      } else {
+        this.productTitle = 'Наши чайные коллекции';
+        this.isEmptySearch = false;
+        this.showAllProducts()
+      }
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptionProducts?.unsubscribe()
+  }
+
+
+  showAllProducts() {
     //setTimeout для тестирования лоадера
     setTimeout(() => {
+
       this.subscriptionProducts = this.productService.getProducts()
         .pipe(
           tap(() => {
@@ -40,10 +74,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
           }
         )
     }, 300)
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptionProducts?.unsubscribe()
   }
 
 }
