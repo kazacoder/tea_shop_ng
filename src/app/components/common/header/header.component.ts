@@ -1,16 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {NavigationStart, Router} from "@angular/router";
+import {filter, Subscription} from "rxjs";
 
 @Component({
   selector: 'header-component',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
 
   searchForm = {
     search: ''
   }
+
+  private subscriptionRouter: Subscription | null = null;
 
   constructor(private router: Router) { }
 
@@ -19,6 +22,18 @@ export class HeaderComponent implements OnInit {
     if (searchString) {
       this.searchForm.search = searchString;
     }
+
+    this.subscriptionRouter = this.router.events
+      .pipe(filter(event => event instanceof NavigationStart))
+      .subscribe((event) => {
+      if (!(event as NavigationStart).url.includes('/products?')) {
+        this.cleanSearchInput()
+      }
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptionRouter?.unsubscribe()
   }
 
   cleanSearchInput() {
@@ -32,5 +47,4 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['/products']).then();
     }
   }
-
 }
