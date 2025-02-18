@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subscription} from "rxjs";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
-import {PopupComponent} from "../../common/popup/popup.component";
+import {PopupComponent} from "../../shared/components/popup/popup.component";
 declare var $: any
 
 @Component({

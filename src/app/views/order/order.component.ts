@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {OrderService} from "../../../services/order.service";
+import {OrderService} from "../../shared/services/order.service";
 import {Subscription, tap} from "rxjs";
 
 @Component({
