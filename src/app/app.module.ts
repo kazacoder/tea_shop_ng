@@ -17,6 +17,7 @@ import { PopupComponent } from './components/common/popup/popup.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     MatButtonModule,
     ReactiveFormsModule,
     FormsModule,
+    NgbModule,
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]
